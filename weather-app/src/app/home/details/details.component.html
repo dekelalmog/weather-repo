@@ -1,0 +1,10 @@
+<p>details works!</p>
+<h1>Find details on your location!</h1>
+<div>
+    <label>enter your location</label>
+    <input [(ngModel)]="city">
+    <button (click)="updateCity()">submit</button>
+</div>
+<div>
+    the state in {{city}} is {{state}}
+</div>
