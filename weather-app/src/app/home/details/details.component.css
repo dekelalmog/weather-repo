@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700');
+
+label,input {
+    display: block;
+}
+button{
+    margin: 10px 0px;
+}
+.error {
+    color: darkred;
+}
+
+.rainbow{
+    cursor: pointer;
+}
+.rainbow:hover{
+    background-image:     linear-gradient(
+       to right, 
+       #E7484F,
+       #F68B1D, 
+       #FCED00,
+       #009E4F,
+       #00AAC3,
+       #732982
+     );
+   animation:slidebg 3s linear infinite;
+ }
+
+ @keyframes slidebg {
+    to {
+      background-position:20vw;
+    }
+  }

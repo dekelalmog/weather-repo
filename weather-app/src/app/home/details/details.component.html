@@ -1,10 +1,20 @@
-<p>details works!</p>
-<h1>Find details on your location!</h1>
-<div>
-    <label>enter your location</label>
-    <input [(ngModel)]="city">
-    <button (click)="updateCity()">submit</button>
+<h1>Find details about your location!</h1>
+<div class="search">
+    <label>enter your location:</label>
+    <input [(ngModel)]="city" autofocus>
+    <button class="rainbow" mat-raised-button color="accent" (click)="searchCity()">search</button>
 </div>
-<div>
-    the state in {{city}} is {{state}}
+<div *ngIf="searched && valid">
+    <h3>
+        The state in {{currentWeather.city}} is: {{currentWeather.state}}
+    </h3>
+    <h3>
+        Location: lat- {{currentWeather.lat}} lon- {{currentWeather.lon}}
+    </h3>
+    <h3>
+        The tempeture is: {{currentWeather.temp}}c but it feels like: {{currentWeather.tempFeeling}}c
+    </h3>
 </div>
+<p class="error" *ngIf="searched && !valid">
+    {{errorMsg}}
+</p>
