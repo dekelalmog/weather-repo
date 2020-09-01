@@ -1,6 +1,6 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import {WeatherService} from '../../services/weather/weather.service';
-import { error } from '@angular/compiler/src/util';
+import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -13,15 +13,14 @@ export class DetailsComponent implements OnInit {
   currentWeather = new Weather(); 
   city = '';
   valid = false;
+  searching = false;
   errorMsg = '';
-  searched = false;
-  
 
   ngOnInit(): void {
   }
 
   searchCity() {
-    this.searched = true;
+    this.searching = true;
     this.weatherService.getCityWeatherByName(this.city).subscribe((weather:any) => {
         this.currentWeather.city = weather.name;
         this.currentWeather.state= weather.weather[0].main;
@@ -30,9 +29,12 @@ export class DetailsComponent implements OnInit {
         this.currentWeather.lon = weather.coord.lon;
         this.currentWeather.lat = weather.coord.lat;
         this.valid = true;
+        this.errorMsg = '';
     },(err)=>{
       this.errorMsg = err;
       this.valid = false;
+   }).add(() => {
+     this.searching = false;
    });
   }
 
